@@ -46,14 +46,15 @@ export function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
           key={todo.id}
           className={cn(
             'flex items-center gap-2 p-4 rounded-lg border',
-            'transition-all duration-200 hover:shadow-sm',
-            todo.completed && 'bg-muted'
+            'transition-all duration-200 hover:shadow-md',
+            todo.completed ? 'bg-muted/50' : 'bg-card'
           )}
         >
           <Checkbox
             checked={todo.completed}
             onCheckedChange={() => onToggle(todo.id)}
             aria-label={`Mark "${todo.text}" as ${todo.completed ? 'incomplete' : 'complete'}`}
+            className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
           />
           
           {editingId === todo.id ? (
@@ -82,6 +83,7 @@ export function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
               size="icon"
               onClick={() => handleEdit(todo)}
               aria-label={`Edit "${todo.text}"`}
+              className="hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-950 dark:hover:text-blue-400"
             >
               <Edit2 className="h-4 w-4" />
             </Button>
@@ -93,6 +95,7 @@ export function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
                 toast.success('Todo deleted successfully');
               }}
               aria-label={`Delete "${todo.text}"`}
+              className="hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400"
             >
               <Trash2 className="h-4 w-4" />
             </Button>

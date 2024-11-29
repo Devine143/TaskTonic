@@ -29,7 +29,11 @@ export function AddTodo({ onAdd }: AddTodoProps) {
         placeholder="What needs to be done?"
         className="flex-1"
       />
-      <Button type="submit" aria-label="Add todo">
+      <Button 
+        type="submit" 
+        aria-label="Add todo"
+        className="bg-indigo-600 hover:bg-indigo-700 text-white transition-colors duration-200"
+      >
         <Plus className="h-4 w-4 mr-2" />
         Add
       </Button>

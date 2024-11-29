@@ -37,12 +37,15 @@ function App() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <header className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold">TaskTonic</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 text-transparent bg-clip-text">
+            TaskTonic
+          </h1>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            className="border-2 hover:border-indigo-600 hover:text-indigo-600 dark:hover:text-indigo-400"
           >
             {theme === 'dark' ? (
               <Sun className="h-5 w-5" />
