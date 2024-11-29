@@ -8,13 +8,25 @@ import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { Toaster } from '@/components/ui/sonner';
 
-function App() {
+export default function App() {
   const {
     todos,
+    categories,
+    tags,
     addTodo,
     toggleTodo,
     deleteTodo,
     editTodo,
+    updateTodoPriority,
+    updateTodoCategory,
+    updateTodoTags,
+    updateTodoDueDate,
+    updateTodoReminder,
+    addSubtask,
+    toggleSubtask,
+    deleteSubtask,
+    editSubtask,
+    addCategory,
     filter,
     setFilter,
     searchQuery,
@@ -71,9 +83,21 @@ function App() {
 
           <TodoList
             todos={filteredTodos}
+            categories={categories}
+            tags={tags}
             onToggle={toggleTodo}
             onDelete={deleteTodo}
             onEdit={editTodo}
+            onPriorityChange={updateTodoPriority}
+            onCategoryChange={updateTodoCategory}
+            onTagsChange={updateTodoTags}
+            onDueDateChange={updateTodoDueDate}
+            onReminderChange={updateTodoReminder}
+            onAddSubtask={addSubtask}
+            onToggleSubtask={toggleSubtask}
+            onDeleteSubtask={deleteSubtask}
+            onEditSubtask={editSubtask}
+            onAddCategory={addCategory}
           />
         </div>
       </div>
@@ -81,5 +105,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

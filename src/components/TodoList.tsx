@@ -1,36 +1,43 @@
-import { useState } from 'react';
-import { Todo } from '@/types/todo';
-import { cn } from '@/lib/utils';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
-import { Trash2, Edit2 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { Todo, Category, Tag } from '@/types/todo';
+import { TodoItem } from './TodoItem';
 
 interface TodoListProps {
   todos: Todo[];
+  categories: Category[];
+  tags: Tag[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onEdit: (id: string, text: string) => void;
+  onPriorityChange: (id: string, priority: Todo['priority']) => void;
+  onCategoryChange: (id: string, categoryId: string) => void;
+  onTagsChange: (id: string, tags: string[]) => void;
+  onDueDateChange: (id: string, date?: Date) => void;
+  onReminderChange: (id: string, date?: Date) => void;
+  onAddSubtask: (todoId: string, text: string) => void;
+  onToggleSubtask: (todoId: string, subtaskId: string) => void;
+  onDeleteSubtask: (todoId: string, subtaskId: string) => void;
+  onEditSubtask: (todoId: string, subtaskId: string, text: string) => void;
+  onAddCategory: (name: string, color: string) => void;
 }
 
-export function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editText, setEditText] = useState('');
-
-  const handleEdit = (todo: Todo) => {
-    setEditingId(todo.id);
-    setEditText(todo.text);
-  };
-
-  const handleSave = (id: string) => {
-    if (editText.trim()) {
-      onEdit(id, editText.trim());
-      setEditingId(null);
-      toast.success('Todo updated successfully');
-    }
-  };
-
+export function TodoList({
+  todos,
+  categories,
+  tags,
+  onToggle,
+  onDelete,
+  onEdit,
+  onPriorityChange,
+  onCategoryChange,
+  onTagsChange,
+  onDueDateChange,
+  onReminderChange,
+  onAddSubtask,
+  onToggleSubtask,
+  onDeleteSubtask,
+  onEditSubtask,
+  onAddCategory,
+}: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className="text-center py-12">
@@ -42,64 +49,25 @@ export function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
   return (
     <ul className="space-y-2">
       {todos.map(todo => (
-        <li
-          key={todo.id}
-          className={cn(
-            'flex items-center gap-2 p-4 rounded-lg border',
-            'transition-all duration-200 hover:shadow-md',
-            todo.completed ? 'bg-muted/50' : 'bg-card'
-          )}
-        >
-          <Checkbox
-            checked={todo.completed}
-            onCheckedChange={() => onToggle(todo.id)}
-            aria-label={`Mark "${todo.text}" as ${todo.completed ? 'incomplete' : 'complete'}`}
-            className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+        <li key={todo.id}>
+          <TodoItem
+            todo={todo}
+            categories={categories}
+            tags={tags}
+            onToggle={onToggle}
+            onDelete={onDelete}
+            onEdit={onEdit}
+            onPriorityChange={onPriorityChange}
+            onCategoryChange={onCategoryChange}
+            onTagsChange={onTagsChange}
+            onDueDateChange={onDueDateChange}
+            onReminderChange={onReminderChange}
+            onAddSubtask={onAddSubtask}
+            onToggleSubtask={onToggleSubtask}
+            onDeleteSubtask={onDeleteSubtask}
+            onEditSubtask={onEditSubtask}
+            onAddCategory={onAddCategory}
           />
-          
-          {editingId === todo.id ? (
-            <Input
-              value={editText}
-              onChange={e => setEditText(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleSave(todo.id)}
-              onBlur={() => handleSave(todo.id)}
-              autoFocus
-              className="flex-1"
-            />
-          ) : (
-            <span
-              className={cn(
-                'flex-1',
-                todo.completed && 'line-through text-muted-foreground'
-              )}
-            >
-              {todo.text}
-            </span>
-          )}
-
-          <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => handleEdit(todo)}
-              aria-label={`Edit "${todo.text}"`}
-              className="hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-950 dark:hover:text-blue-400"
-            >
-              <Edit2 className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                onDelete(todo.id);
-                toast.success('Todo deleted successfully');
-              }}
-              aria-label={`Delete "${todo.text}"`}
-              className="hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400"
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          </div>
         </li>
       ))}
     </ul>
