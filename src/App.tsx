@@ -45,8 +45,8 @@ export default function App() {
     );
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center">
+      <div className="w-full max-w-3xl px-4 py-8">
         <header className="flex items-center justify-between mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 text-transparent bg-clip-text">
             TaskTonic
