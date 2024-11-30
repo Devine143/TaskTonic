@@ -12,7 +12,6 @@ export default function App() {
   const {
     todos,
     categories,
-    tags,
     addTodo,
     toggleTodo,
     deleteTodo,
@@ -20,7 +19,6 @@ export default function App() {
     reorderTodos,
     updateTodoPriority,
     updateTodoCategory,
-    updateTodoTags,
     updateTodoDueDate,
     updateTodoReminder,
     addSubtask,
@@ -85,13 +83,11 @@ export default function App() {
           <TodoList
             todos={filteredTodos}
             categories={categories}
-            tags={tags}
             onToggle={toggleTodo}
             onDelete={deleteTodo}
             onEdit={editTodo}
             onPriorityChange={updateTodoPriority}
             onCategoryChange={updateTodoCategory}
-            onTagsChange={updateTodoTags}
             onDueDateChange={updateTodoDueDate}
             onReminderChange={updateTodoReminder}
             onAddSubtask={addSubtask}

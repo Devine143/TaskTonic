@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Todo, Category, Tag } from '@/types/todo';
+import { Todo, Category } from '@/types/todo';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Trash2, Edit2, ChevronDown, ChevronRight } from 'lucide-react';
 import { PrioritySelect } from './PrioritySelect';
 import { CategorySelect } from './CategorySelect';
-import { TagSelect } from './TagSelect';
 import { DatePicker } from './DatePicker';
 import { SubTaskList } from './SubTaskList';
 import {
@@ -19,13 +18,11 @@ import {
 interface TodoItemProps {
   todo: Todo;
   categories: Category[];
-  tags: Tag[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onEdit: (id: string, text: string) => void;
   onPriorityChange: (id: string, priority: Todo['priority']) => void;
   onCategoryChange: (id: string, categoryId: string) => void;
-  onTagsChange: (id: string, tags: string[]) => void;
   onDueDateChange: (id: string, date?: Date) => void;
   onReminderChange: (id: string, date?: Date) => void;
   onAddSubtask: (todoId: string, text: string) => void;
@@ -38,13 +35,11 @@ interface TodoItemProps {
 export function TodoItem({
   todo,
   categories,
-  tags,
   onToggle,
   onDelete,
   onEdit,
   onPriorityChange,
   onCategoryChange,
-  onTagsChange,
   onDueDateChange,
   onReminderChange,
   onAddSubtask,
@@ -70,7 +65,6 @@ export function TodoItem({
   };
 
   const selectedCategory = categories.find(c => c.id === todo.categoryId);
-  const selectedTags = tags.filter(tag => todo.tags.includes(tag.id));
 
   return (
     <Collapsible
@@ -138,14 +132,6 @@ export function TodoItem({
                   selectedCategoryId={todo.categoryId}
                   onCategoryChange={categoryId => onCategoryChange(todo.id, categoryId)}
                   onAddCategory={onAddCategory}
-                />
-              </div>
-
-              <div className="flex items-center gap-1 min-w-[120px]">
-                <TagSelect
-                  tags={tags}
-                  selectedTags={todo.tags}
-                  onTagsChange={tags => onTagsChange(todo.id, tags)}
                 />
               </div>
 

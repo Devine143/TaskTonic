@@ -16,9 +16,3 @@ export const DEFAULT_CATEGORIES = [
   { id: 'shopping', name: 'Shopping', color: '#D97706' },
   { id: 'health', name: 'Health', color: '#DC2626' },
 ] as const;
-
-export const DEFAULT_TAGS = [
-  { id: 'urgent', name: 'Urgent', color: '#EF4444' },
-  { id: 'important', name: 'Important', color: '#F59E0B' },
-  { id: 'later', name: 'Later', color: '#6366F1' },
-] as const;

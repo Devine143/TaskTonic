@@ -1,19 +1,17 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Todo, Category, Tag } from "@/types/todo";
+import { Todo, Category } from "@/types/todo";
 import { TodoItem } from "./TodoItem";
 import { GripVertical } from "lucide-react";
 
 interface DraggableTodoItemProps {
   todo: Todo;
   categories: Category[];
-  tags: Tag[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onEdit: (id: string, text: string) => void;
   onPriorityChange: (id: string, priority: Todo["priority"]) => void;
   onCategoryChange: (id: string, categoryId: string) => void;
-  onTagsChange: (id: string, tags: string[]) => void;
   onDueDateChange: (id: string, date?: Date) => void;
   onReminderChange: (id: string, date?: Date) => void;
   onAddSubtask: (todoId: string, text: string) => void;
@@ -26,13 +24,11 @@ interface DraggableTodoItemProps {
 export function DraggableTodoItem({
   todo,
   categories,
-  tags,
   onToggle,
   onDelete,
   onEdit,
   onPriorityChange,
   onCategoryChange,
-  onTagsChange,
   onDueDateChange,
   onReminderChange,
   onAddSubtask,
@@ -73,13 +69,11 @@ export function DraggableTodoItem({
         <TodoItem
           todo={todo}
           categories={categories}
-          tags={tags}
           onToggle={onToggle}
           onDelete={onDelete}
           onEdit={onEdit}
           onPriorityChange={onPriorityChange}
           onCategoryChange={onCategoryChange}
-          onTagsChange={onTagsChange}
           onDueDateChange={onDueDateChange}
           onReminderChange={onReminderChange}
           onAddSubtask={onAddSubtask}

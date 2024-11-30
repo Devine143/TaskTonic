@@ -8,12 +8,6 @@ export interface Category {
   color: string;
 }
 
-export interface Tag {
-  id: string;
-  name: string;
-  color: string;
-}
-
 export interface SubTask {
   id: string;
   text: string;
@@ -30,7 +24,6 @@ export interface Todo {
   updatedAt: Date;
   priority: Priority;
   categoryId?: string;
-  tags: string[];
   dueDate?: Date;
   subtasks: SubTask[];
   reminder?: Date;
@@ -39,14 +32,12 @@ export interface Todo {
 export interface TodoContextType {
   todos: Todo[];
   categories: Category[];
-  tags: Tag[];
   addTodo: (text: string) => void;
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
   editTodo: (id: string, text: string) => void;
   updateTodoPriority: (id: string, priority: Priority) => void;
   updateTodoCategory: (id: string, categoryId: string) => void;
-  updateTodoTags: (id: string, tags: string[]) => void;
   updateTodoDueDate: (id: string, dueDate?: Date) => void;
   updateTodoReminder: (id: string, reminder?: Date) => void;
   addSubtask: (todoId: string, text: string) => void;
@@ -56,9 +47,6 @@ export interface TodoContextType {
   addCategory: (name: string, color: string) => void;
   editCategory: (id: string, name: string, color: string) => void;
   deleteCategory: (id: string) => void;
-  addTag: (name: string, color: string) => void;
-  editTag: (id: string, name: string, color: string) => void;
-  deleteTag: (id: string) => void;
   filter: TodoFilter;
   setFilter: (filter: TodoFilter) => void;
   searchQuery: string;
