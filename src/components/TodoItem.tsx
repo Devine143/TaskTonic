@@ -81,7 +81,7 @@ export function TodoItem({
         todo.completed && 'bg-muted/50'
       )}
     >
-      <div className="flex items-center gap-2 p-4">
+      <div className="grid grid-cols-[auto_auto_1fr_auto] items-center gap-4 p-4">
         <Checkbox
           checked={todo.completed}
           onCheckedChange={() => onToggle(todo.id)}
@@ -103,7 +103,7 @@ export function TodoItem({
         </CollapsibleTrigger>
 
         {isEditing ? (
-          <div className="flex flex-1 items-center gap-2">
+          <div className="flex items-center gap-2 col-span-2">
             <Input
               value={editText}
               onChange={e => setEditText(e.target.value)}
@@ -117,50 +117,64 @@ export function TodoItem({
           <>
             <span
               className={cn(
-                'flex-1',
+                'min-w-[200px]',
                 todo.completed && 'line-through text-muted-foreground'
               )}
             >
               {todo.text}
             </span>
 
-            <div className="flex items-center gap-1">
-              <PrioritySelect
-                priority={todo.priority}
-                onPriorityChange={priority => onPriorityChange(todo.id, priority)}
-              />
-              <CategorySelect
-                categories={categories}
-                selectedCategoryId={todo.categoryId}
-                onCategoryChange={categoryId => onCategoryChange(todo.id, categoryId)}
-                onAddCategory={onAddCategory}
-              />
-              <TagSelect
-                tags={tags}
-                selectedTags={todo.tags}
-                onTagsChange={tags => onTagsChange(todo.id, tags)}
-              />
-              <DatePicker
-                date={todo.dueDate}
-                onDateChange={date => onDueDateChange(todo.id, date)}
-                label="Due date"
-              />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleEdit}
-                className="h-8 w-8 hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-950 dark:hover:text-blue-400"
-              >
-                <Edit2 className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => onDelete(todo.id)}
-                className="h-8 w-8 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+            <div className="flex items-center gap-4 justify-end">
+              <div className="flex items-center gap-1 min-w-[120px]">
+                <PrioritySelect
+                  priority={todo.priority}
+                  onPriorityChange={priority => onPriorityChange(todo.id, priority)}
+                />
+              </div>
+
+              <div className="flex items-center gap-1 min-w-[120px]">
+                <CategorySelect
+                  categories={categories}
+                  selectedCategoryId={todo.categoryId}
+                  onCategoryChange={categoryId => onCategoryChange(todo.id, categoryId)}
+                  onAddCategory={onAddCategory}
+                />
+              </div>
+
+              <div className="flex items-center gap-1 min-w-[120px]">
+                <TagSelect
+                  tags={tags}
+                  selectedTags={todo.tags}
+                  onTagsChange={tags => onTagsChange(todo.id, tags)}
+                />
+              </div>
+
+              <div className="flex items-center gap-1 min-w-[200px]">
+                <DatePicker
+                  date={todo.dueDate}
+                  onDateChange={date => onDueDateChange(todo.id, date)}
+                  label="Due date"
+                />
+              </div>
+
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleEdit}
+                  className="h-8 w-8 hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-950 dark:hover:text-blue-400"
+                >
+                  <Edit2 className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onDelete(todo.id)}
+                  className="h-8 w-8 hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </>
         )}

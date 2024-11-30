@@ -87,6 +87,15 @@ export function useTodos() {
     );
   }, []);
 
+  const reorderTodos = useCallback((startIndex: number, endIndex: number) => {
+    setTodos(prev => {
+      const result = Array.from(prev);
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+      return result;
+    });
+  }, []);
+
   const updateTodoPriority = useCallback((id: string, priority: Priority) => {
     setTodos(prev =>
       prev.map(todo =>
@@ -269,6 +278,7 @@ export function useTodos() {
     toggleTodo,
     deleteTodo,
     editTodo,
+    reorderTodos,
     updateTodoPriority,
     updateTodoCategory,
     updateTodoTags,

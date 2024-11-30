@@ -17,6 +17,7 @@ export default function App() {
     toggleTodo,
     deleteTodo,
     editTodo,
+    reorderTodos,
     updateTodoPriority,
     updateTodoCategory,
     updateTodoTags,
@@ -98,6 +99,7 @@ export default function App() {
             onDeleteSubtask={deleteSubtask}
             onEditSubtask={editSubtask}
             onAddCategory={addCategory}
+            onReorder={reorderTodos}
           />
         </div>
       </div>
